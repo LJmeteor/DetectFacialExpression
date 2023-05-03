@@ -10,10 +10,7 @@ SCOPES = ['https://www.googleapis.com/auth/classroom.courses.readonly']
 credentials = Credentials.from_service_account_file('facialdetection-384720-04866abf3cf6.json')
 client = vision.ImageAnnotatorClient(credentials=credentials)
 
-## youtube url
-# url="https://www.youtube.com/watch?v=BS9gX34VpkI"
-# video = pafy.new(url)
-# best = video.getbest(preftype="mp4")
+
   
 def func():
     # define a video capture object
@@ -41,6 +38,7 @@ def func():
 
 def detectFacialExpressionByURL(url):
     # Capture video from Youtube URL
+    # if u want to use webcam, set url=0
     cap = cv2.VideoCapture(url)
 
     while True:
@@ -81,7 +79,7 @@ def detectFacialExpressionByURL(url):
     cap.release()
     cv2.destroyAllWindows()
 
-
+## the path indicates the image path
 def detect_faces(path):
     """Detects faces in an image."""
 
@@ -104,10 +102,7 @@ def detect_faces(path):
         print('surprise: {}'.format(likelihood_name[face.surprise_likelihood]))
         print('sorrow: {}'.format(likelihood_name[face.sorrow_likelihood]))
 
-        # vertices = (['({},{})'.format(vertex.x, vertex.y)
-        #             for vertex in face.bounding_poly.vertices])
 
-        # print('face bounds: {}'.format(','.join(vertices)))
 
     if response.error.message:
         raise Exception(
@@ -125,6 +120,7 @@ if __name__=="__main__":
     video = pafy.new(url,basic=False)
     best = video.getbestvideo(preftype="mp4")
     print(best.url)
+    ## if u want to use laptop webcam, set url=0
     detectFacialExpressionByURL(best.url)
 
     
